@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>books</title>
 </head>
 <body>
 <form th:method="GET" ></form>
-<label for ="book"> выберете knigu </label>
-<select id="book" th:object="book" th:field="*{id}">
+<label for ="booke"> vibirite  knigu </label>
+<select id="booke" th:object="booke" th:field="*{book_id}">
     <option th:each="books : ${book}" th:value="${book.getId}" th:text="${book.getName}"></option>
 </select>
 </body>

@@ -1,4 +1,4 @@
-package spring.yuriygundiuc.librarie;
+package spring.yuriygundiuc.librarie.book;
 
 public class Book {
     private int book_id;
@@ -8,7 +8,8 @@ public class Book {
     public Book(){
 
     }
-    public Book(String title, String author, int year) {
+    public Book(int book_id, String title, String author, int year) {
+        this.book_id = book_id;
         this.title = title;
         this.author = author;
         this.year = year;

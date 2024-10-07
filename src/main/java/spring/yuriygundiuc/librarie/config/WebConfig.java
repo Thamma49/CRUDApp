@@ -1,4 +1,4 @@
-package spring.yuriygundiuc.librarie;
+package spring.yuriygundiuc.librarie.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

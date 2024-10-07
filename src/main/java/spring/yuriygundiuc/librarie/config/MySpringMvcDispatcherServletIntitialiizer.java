@@ -1,4 +1,4 @@
-package spring.yuriygundiuc.librarie;
+package spring.yuriygundiuc.librarie.config;
 
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

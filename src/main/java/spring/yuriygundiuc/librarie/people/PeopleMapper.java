@@ -1,4 +1,4 @@
-package spring.yuriygundiuc.librarie;
+package spring.yuriygundiuc.librarie.people;
 
 import org.springframework.jdbc.core.RowMapper;
 

@@ -1,4 +1,4 @@
-package spring.yuriygundiuc.librarie;
+package spring.yuriygundiuc.librarie.people;
 
 public class Person {
     private int person_id;
