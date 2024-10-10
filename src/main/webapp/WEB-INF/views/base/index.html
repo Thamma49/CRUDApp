@@ -1,14 +1,20 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
+    <body>
     <meta charset="UTF-8">
-    <title>books</title>
-</head>
-<body>
-<form th:method="GET" ></form>
-<label for ="booke"> vibirite  knigu </label>
-<select id="booke" th:object="booke" th:field="*{book_id}">
-    <option th:each="books : ${book}" th:value="${book.getId}" th:text="${book.getName}"></option>
-</select>
+    <title>show all </title>
+    <form th:method="GET" th:action="@{/ppl/{id}(id=${person.getId()})}" th:object="${person}">
+        <label for="name">Enter name: </label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <br/>
+        <label for="age">Enter age: </label>
+        <input type="text" th:field="*{age}" id="age"/>
+        <br/>
+        <input type="submit" value="submit"/>
+    </form>
+<a th:href="@{/ppl/all}">all ppl</a>
+<a th:href="@{/ppl/create}">create new ppl </a>
 </body>
 </html>

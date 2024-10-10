@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.SQLException;
@@ -20,10 +22,15 @@ public BookController(BookDAO bookDAO ) {
 }
 @GetMapping()
     public String index(Model model) throws SQLException, PSQLException {
-    System.out.println("before dao ");
-    model.addAttribute("booke",bookDAO.index());
-    System.out.println("after dao ");
+
+    model.addAttribute("book",bookDAO.index());
+
     return "base/index";
 }
 
+@PostMapping("/stage2")
+public String stage2(@ModelAttribute("book") Book book) throws SQLException, PSQLException {
+
+    return "redirect:/s2ppl";
+}
 }
