@@ -9,11 +9,11 @@ public class BookMapper implements RowMapper<Book> {
     @Override
     public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
         Book booke = new Book();
-        booke.setId(rs.getInt("book_id"));
-        booke.setTitle(rs.getString("title"));
+        booke.setId(rs.getInt("id"));
+        booke.setTitle(rs.getString("name"));
         booke.setAuthor(rs.getString("author"));
-        booke.setYear(rs.getInt("year"));
-        booke.setKolvo("kolvo");
+        booke.setYear(rs.getInt("date"));
+
         System.out.println("map row ");
         return booke;
     }

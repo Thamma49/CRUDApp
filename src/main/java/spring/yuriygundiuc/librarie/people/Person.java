@@ -1,12 +1,10 @@
 package spring.yuriygundiuc.librarie.people;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class Person {
-    private int person_id;
+    private int id;
 
     @NotEmpty(message ="imya ne mochet bit pustim")
     @Size(min = 2, max = 20, message = "Om 2 do 20 simvolov")
@@ -14,25 +12,27 @@ public class Person {
 
     @NotEmpty(message ="familiya ne mochet bit pustim")
     @Size(min = 2, max = 20, message = "Om 2 do 20 simvolov")
-    private String surname;
+    private String surName;
 
-    @NotEmpty(message = "vvedite vash vozrast")
-    @Min(value=0,message = "min znach 0 ")
-    private int age;
+
+
+    @NotEmpty(message = "vvedite norm email pls ")
+    private String email;
 
     public Person() {}
-    public Person(int id, String name, String surname, int age) {
-        this.person_id = id;
+    public Person(int id, String name, String surname,String email) {
+        this.id = id;
         this.name = name;
-        this.surname = surname;
-        this.age = age;
+        this.surName = surname;
+        this.email = email;
+
 
     }
-    public int getPerson_id() {
-        return person_id;
+    public int getId() {
+        return id;
     }
     public void setId(int id) {
-        this.person_id = id;
+        this.id = id;
     }
     public String getName() {
         return name;
@@ -40,17 +40,18 @@ public class Person {
     public void setName(String name) {
         this.name = name;
     }
-    public String getSurname() {
-        return surname;
+    public String getSurName() {
+        return surName;
     }
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
+    public void setSurName(String surname) {
+        this.surName = surname;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

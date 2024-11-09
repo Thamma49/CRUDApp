@@ -20,8 +20,14 @@ public class PersonValidator implements Validator {
    @Override
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
-        if (person.getAge() < 18) {
-            errors.rejectValue("age", "person.age.must.be.18");
+        if(personDAO.showOptional(person.getId()).isPresent()) {
+            errors.rejectValue("id", "person.person_id.exists");
+        }
+         if (personDAO.showOptional(person.getName()).isPresent()) {
+            errors.rejectValue("name",null,"person.name.must.be.declare");
+        }
+        else if (personDAO.showOptional(person.getSurName()).isPresent()) {
+            errors.rejectValue("surname",null,"person.surname.must.be.declare");
         }
    }
     }

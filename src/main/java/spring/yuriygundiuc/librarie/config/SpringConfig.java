@@ -76,4 +76,11 @@ public class SpringConfig implements WebMvcConfigurer {
         return new JdbcTemplate(dataSource());
 
     }
+//    @Bean
+//    public FilterRegistrationBean<LoggingFilter> loggingFilter() {
+//        FilterRegistrationBean<LoggingFilter> registrationBean = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(new LoggingFilter());
+//        registrationBean.addUrlPatterns("/people/*");
+//        return registrationBean;
+//    }
 }

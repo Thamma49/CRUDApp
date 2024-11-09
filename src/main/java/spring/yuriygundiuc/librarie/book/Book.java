@@ -1,32 +1,39 @@
 package spring.yuriygundiuc.librarie.book;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Book {
-    private int book_id;
-    private String title;
+    private int id;
+    @NotEmpty
+    @Size(min = 2, max = 20, message = "Om 2 do 20 simvolov")
+    private String name;
+    @NotEmpty
+    @Size(min = 2, max = 20, message = "Om 2 do 20 simvolov")
     private String author;
-    private int year;
-    private String kolvo;
+    private int date ;
+
     public Book(){
 
     }
-    public Book(int book_id, String title, String author, int year, String kolvo) {
-        this.book_id = book_id;
-        this.title = title;
+    public Book(int book_id, String title, String author, int year) {
+        this.id = book_id;
+        this.name = title;
         this.author = author;
-        this.year = year;
-        this.kolvo = kolvo;
+        this.date = year;
+
     }
-    public int getBook_id() {
-        return book_id;
+    public int getId() {
+        return id;
     }
     public void setId(int id) {
-        this.book_id = id;
+        this.id = id;
     }
     public String getTitle() {
-        return title;
+        return name;
     }
     public void setTitle(String title) {
-        this.title = title;
+        this.name = title;
     }
     public String getAuthor() {
         return author;
@@ -35,18 +42,12 @@ public class Book {
         this.author = author;
     }
     public int getYear() {
-        return year;
+        return date;
     }
     public void setYear(int year) {
-        this.year = year;
+        this.date = year;
     }
 
-    public String getKolvo() {
-        return kolvo;
-    }
-    public void setKolvo(String kolvo) {
-        this.kolvo = kolvo;
-    }
 
 
 }

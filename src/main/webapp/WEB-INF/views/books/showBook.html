@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
+    <title>qeafrwerfew</title>
+</head>
+<body>
+
+<!--<p th:text="${book.getTitle()  + ', ' + book.getYear()}">VALUE</p>-->
+<!--<p th:text="${'Author: ' + book.getAuthor()}">VALUE</p>-->
+<!--<p th:text="${book.getId()}">VALUE</p>-->
+<!--<hr>-->
+<p th:text="${book.getTitle() + ', ' + book.getYear()}">dfgh</p>
+<p th:text="${'aUTHOR: ' + book.getAuthor()}">dfg</p>
+<p th:text="${'ID: ' + book.getId()}">ID</p>
+<hr>
+
+<!--<div-->
+<!--<form th:method="POST" th:action="@{/books/{id}/{person}/setbook(id=${book.getId()},person=person.getId())}">-->
+<!--    <span>select ppl : </span>-->
+<!--    <select th:field="${persons}" th: id="person">-->
+<!--        <option th:each="person : ${persons}"-->
+<!--                th:value="${person.getId()}"-->
+<!--                th:text="${person.getName()}">-->
+<!--        </option>-->
+<!--    </select>-->
+<!--    <input th:field="*{id}" type="submit" value="select ppl"/>-->
+<!--</form>-->
+
+
+
+
+<!--<form th:method="post" th:action="@{/books/{id}/{person}/setbook(id=${book.getId()}, person=${selectedPerson})}">-->
+<!--    <span>select ppl : </span>-->
+
+<!--    <select th:field="*{selectedPerson}" id="person">-->
+<!--        <option th:each="person : ${persons}"-->
+<!--                th:value="${person.getId()}"-->
+<!--                th:text="${person.getName()}">-->
+<!--        </option>-->
+<!--    </select>-->
+
+<!--    <input type="submit" value="Select Person"/>-->
+<!--</form>-->
+
+
+
+
+
+
+
+<!--<label for ="persons"> select person  </label>-->
+<!--<select id="persons" th:object="persons" th:field="*{id}">-->
+<!--    <option th:each="person : ${persons}" th:value="${person.getId()}" th:text="${person.getName()}"></option>-->
+<!--</select>-->
+<!--    <form th:method="patch" th:action="@{/books/setBook}">-->
+<!--    <input type="submit" value="select person "/>-->
+<!--</form>-->
+
+
+
+
+
+
+<form id="personForm" th:method="post"
+      th:action="@{/books/{id}/{person}(id=${book.getId()}, person=0)}">
+    <span>Select person: </span>
+
+    <!-- Выпадающий список для выбора человека -->
+    <select id="personSelect">
+        <option th:each="person : ${persons}"
+                th:value="${person.getId()}"
+                th:text="${person.getName()}">
+        </option>
+    </select>
+
+    <!-- Кнопка отправки формы -->
+    <input type="submit" value="Select Person" onclick="updateFormAction(event)"/>
+</form>
+
+<script>
+    // Функция обновления URL в action формы
+    function updateFormAction(event) {
+        event.preventDefault(); // Останавливаем отправку формы
+        const form = document.getElementById('personForm');
+        const personSelect = document.getElementById('personSelect');
+        const selectedPersonId = personSelect.value;
+
+        // Получаем текущий URL action из формы
+        let actionUrl = form.getAttribute('action');
+
+        // Заменяем значение параметра {person} на выбранного человека
+        actionUrl = actionUrl.replace('/0', `/${selectedPersonId}`);
+
+        // Устанавливаем новый action для формы
+        form.setAttribute('action', actionUrl);
+
+        // Отправляем форму
+        form.submit();
+    }
+</script>
+
+
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

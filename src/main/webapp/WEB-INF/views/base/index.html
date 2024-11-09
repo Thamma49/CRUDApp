@@ -5,16 +5,31 @@
     <body>
     <meta charset="UTF-8">
     <title>show all </title>
-    <form th:method="GET" th:action="@{/ppl/{id}(id=${person.getId()})}" th:object="${person}">
-        <label for="name">Enter name: </label>
-        <input type="text" th:field="*{name}" id="name"/>
-        <br/>
-        <label for="age">Enter age: </label>
-        <input type="text" th:field="*{age}" id="age"/>
-        <br/>
-        <input type="submit" value="submit"/>
-    </form>
-<a th:href="@{/ppl/all}">all ppl</a>
-<a th:href="@{/ppl/create}">create new ppl </a>
+<!--    <form th:method="GET" th:action="@{/ppl/{id}(id=${person.getId()})}" th:object="${person}">-->
+<!--        <label for="name">Enter name: </label>-->
+<!--        <input type="text" th:field="*{name}" id="name"/>-->
+<!--        <br/>-->
+<!--        <label for="name">Enter surname: </label>-->
+<!--        <input type="text" th:field="*{name}" id="surname"/>-->
+<!--        <br/>-->
+<!--        <label for="age">Enter age: </label>-->
+<!--        <input type="text" th:field="*{age}" id="age"/>-->
+<!--        <br/>-->
+<!--        <input type="submit" value="submit"/>-->
+<!--    </form>-->
+<!--<a th:href="@{/ppl/all}">all ppl</a>-->
+<!--<a th:href="@{/ppl/create}">create new ppl </a>-->
+
+
+    <h2> all ppl </h2>
+    <div th:each="person : ${people}">
+        <a th:href="@{/people/{id}(id=${person.getId()})}">
+            <span th:text="${person.getName()}"></span>,
+            <span th:text="${person.getSurName()}"></span>,
+            <span th:text="${person.getEmail()}"></span>
+        </a>
+    </div>
+    <hr>
+    <a th:href="@{/people/new}">new ppl </a>
 </body>
 </html>

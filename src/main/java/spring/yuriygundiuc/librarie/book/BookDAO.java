@@ -6,9 +6,12 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import spring.yuriygundiuc.librarie.people.Person;
+import spring.yuriygundiuc.librarie.people.PersonMapper;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 
 @Component
@@ -19,14 +22,49 @@ public class BookDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
     public List<Book> index() throws SQLException, BadSqlGrammarException {
-        return jdbcTemplate.query("SELECT * FROM book", new BeanPropertyRowMapper<Book>(Book.class));
+        return jdbcTemplate.query("SELECT * FROM book", new BookMapper());
     }
     public Book find(Book book) throws SQLException, BadSqlGrammarException {
-        if(book.getBook_id()<0){
+        if(book.getId()<0){
             return null;
         }
-//        return jdbcTemplate.query("select * from book where book_id=?", new Object[]{book.getBook_id()},new BeanPropertyRowMapper(Book.class) );
+//        return jdbcTemplate.query("select * from book where id=?", new Object[]{book.getBook_id()},new BeanPropertyRowMapper(Book.class) );
         return null;
+    }
+    public Book show(int id) {
+        return  jdbcTemplate.query("select * from book where id = ?", new Object[]{id}, new BookMapper()).stream().findAny().orElse(null);
+
+    }
+
+
+    public Optional<Book> showOptional(int id) {
+        return jdbcTemplate.query("select * from book where id = ?", new Object[]{id}, new BookMapper()).stream().findAny();
+    }
+    public Optional<Book> showOptional(String author) {
+        return jdbcTemplate.query("select * from book where  author= ?", new Object[]{author}, new BookMapper()).stream().findAny();
+    }
+
+    public Optional<Book> showOptional(Book book) {
+        return jdbcTemplate.query("select * from book where name=?", new Object[]{book.getTitle()}, new BookMapper()).stream().findAny();
+    }
+    public void save(Book book) {
+
+        jdbcTemplate.update("insert into book(author,name,date) values(?,?,?)",book.getAuthor(),book.getTitle(),book.getYear());
+    }
+    public void delete(int id) {
+
+        jdbcTemplate.update("delete from book where id=?",id);
+    }
+    public void yetBooks(int id,int idd ) {
+         jdbcTemplate.update("update book set person_id=? where id=? ",idd,id);
+    }
+    public void notYet(int id) {
+        jdbcTemplate.update("UPDATE book set person_id = null where id=?", id);
+    }
+
+
+    public Book yet(int author) {
+        return jdbcTemplate.query("select * from book where person_id=?", new Object[]{author}, new BookMapper()).stream().findAny().orElse(null);
     }
 
 
