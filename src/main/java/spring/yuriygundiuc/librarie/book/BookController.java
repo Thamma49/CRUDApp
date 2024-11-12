@@ -35,6 +35,15 @@ public class BookController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model,@ModelAttribute("person") Person person) throws SQLException {
+//if(bookDAO.check(id)==true){
+//    model.addAttribute("chislo",1);
+//    return "books/showBook";
+//}
+
+        boolean isBookOccupied = bookDAO.check(id);
+
+        model.addAttribute("chislo", isBookOccupied ? 1 : 0);
+//        model.addAttribute("chislo",0);
         model.addAttribute("book", bookDAO.show(id));
         model.addAttribute("persons", personDAO.index());
         return "books/showBook";
@@ -68,13 +77,15 @@ public class BookController {
     @PostMapping("/{id}/{person}")
     public String setBook(@ModelAttribute("book") @Valid Book book,@PathVariable("id") int id  ,Model model,@PathVariable("person") int idd )throws SQLException, PSQLException {
 //        model.addAttribute("books",bookDAO.select() );
+
 bookDAO.yetBooks(id,idd);
-        return "redirect:/books";//в редиректе именно ссылка там где ее вставлять в гугле
-    }
-    @PostMapping("/{id}/release")
-    public String release(@PathVariable("id") int id) {
-        bookDAO.notYet(id);
         return "redirect:/books";
+    }
+
+    @PostMapping("/{id}/free")
+    public String osvobodit(@PathVariable("id") int id) {
+        bookDAO.notYet(id);
+        return "redirect:/books/{id}";
     }
 }
 

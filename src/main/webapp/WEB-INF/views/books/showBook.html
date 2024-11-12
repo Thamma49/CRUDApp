@@ -15,6 +15,11 @@
 <p th:text="${'ID: ' + book.getId()}">ID</p>
 <hr>
 
+<!--<p th:text="${book.getTitle() + ', ' + book.getYear()}">dfgh</p>-->
+<!--<p th:text="${'aUTHOR: ' + book.getAuthor()}">dfg</p>-->
+<!--<p th:text="${'ID: ' + book.getId()}">ID</p>-->
+<!--<hr>-->
+
 <!--<div-->
 <!--<form th:method="POST" th:action="@{/books/{id}/{person}/setbook(id=${book.getId()},person=person.getId())}">-->
 <!--    <span>select ppl : </span>-->
@@ -62,6 +67,39 @@
 
 
 
+
+<!--<form id="personForm" th:method="post" th:action="@{/books/{id}/{person}(id=${book.getId()},person=${selectedPerson})}">-->
+<!--    <span>Select person: </span>-->
+
+<!--    <select id="personSelect">-->
+<!--        <option th:each="person : ${persons}"-->
+<!--                th:value="${person.getId()}"-->
+<!--                th:text="${person.getName()}">-->
+<!--        </option>-->
+<!--    </select>-->
+
+<!--    <input type="submit" value="Select Person" onclick="updateFormAction()"/>-->
+<!--</form>-->
+
+<!--<script>-->
+<!--    function updateFormAction() {-->
+<!--        const selectedPersonId = document.getElementById("personSelect").value;-->
+<!--        const form = document.getElementById("personForm");-->
+<!--        const baseAction = form.getAttribute("th:action");-->
+
+<!--        // Обновляем URL action с выбранным person ID-->
+<!--        form.action = baseAction.replace('{person}', selectedPersonId);-->
+<!--    }-->
+<!--</script>-->
+<div th:if="${chislo ==1}">
+    <p >Book zanyat </p>
+    <form th:method="patch" th:action="@{/books/{id}/free(id=${book.getId()})}">
+        <input type="submit" value="osvobodit knigu "/>
+    </form>
+
+</div>
+
+<div th:if="${chislo == 0}">
 <form id="personForm" th:method="post"
       th:action="@{/books/{id}/{person}(id=${book.getId()}, person=0)}">
     <span>Select person: </span>
@@ -77,6 +115,7 @@
     <!-- Кнопка отправки формы -->
     <input type="submit" value="Select Person" onclick="updateFormAction(event)"/>
 </form>
+</div>
 
 <script>
     // Функция обновления URL в action формы
@@ -99,10 +138,16 @@
         form.submit();
     }
 </script>
+<hr>
+
+
+
 
 
 <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
     <input type="submit" value="Delete"/>
 </form>
+
+
 </body>
 </html>

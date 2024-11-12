@@ -1,6 +1,7 @@
 package spring.yuriygundiuc.librarie.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -63,10 +64,37 @@ public class BookDAO {
     }
 
 
-    public Book yet(int author) {
-        return jdbcTemplate.query("select * from book where person_id=?", new Object[]{author}, new BookMapper()).stream().findAny().orElse(null);
+//    public Book yet(int author) {
+//        return jdbcTemplate.query("select * from book where person_id=?", new Object[]{author}, new BookMapper()).stream().findAny().orElse(null);
+//    }
+    public List<Book> yet(int author) {
+        return jdbcTemplate.query("select * from book where person_id=?", new Object[]{author}, new BookMapper());
     }
+//    public Integer check (int id){
+//if(jdbcTemplate.query("select * from book where id=?",Object[]{id}, Integer.class) ){
+//    return 1;
+//}
+//return 0;
+//    }
 
+//    public boolean check(int id)throws BadSqlGrammarException {
+//        String sql = "SELECT person_id FROM book WHERE id = ?";
+//        Integer personId = jdbcTemplate.queryForObject(sql, new Object[]{id}, Integer.class);
+//
+//        // Проверка на null: если personId не null, возвращаем true, иначе false
+//        return personId != null;
+//    }
+public boolean check(int id) throws BadSqlGrammarException {
+    String sql = "SELECT person_id FROM book WHERE id = ?";
+    try {
+        Integer personId = jdbcTemplate.queryForObject(sql, new Object[]{id}, Integer.class);
+        // Проверка на null: если personId не null, возвращаем true, иначе false
+        return personId != null;
+    } catch (EmptyResultDataAccessException e) {
+        // Если запись не найдена, возвращаем false
+        return false;
+    }
+}
 
 
 }
